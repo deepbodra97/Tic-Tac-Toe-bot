@@ -5,6 +5,8 @@ from sklearn.model_selection import KFold
 
 import numpy as np
 
+import pickle
+
 # hyperparameters
 n_neighbors = 2
 
@@ -32,7 +34,8 @@ class MyKNeighborsRegressor:
 			print("Model", i+1)
 			for train_index, test_index in kf.split(self.X):
 				clf.fit(self.X[train_index], self.ys[:, i][train_index].ravel())
-				self.scores.append(evaluation.get_accuracy(np.around(clf.predict(self.X[test_index])), self.ys[:, i][test_index]))
+				# self.scores.append(clf.score(self.X[test_index], self.ys[test_index, i]))
+				self.scores.append(evaluation.get_regressor_accuracy(np.around(clf.predict(self.X[test_index])), self.ys[:, i][test_index]))
 			self.print_bootstrap_scores()
 			self.scores = []
 		print()
@@ -42,6 +45,14 @@ class MyKNeighborsRegressor:
 		for i, clf in enumerate(self.clfs):	
 			predictions[i] = clf.predict(x)[0]
 		return predictions
+
+	def save(self, filename='knregressor'):
+		for i, clf in enumerate(self.clfs):	
+			pickle.dump(clf, open("./models/"+filename+str(i), 'wb'))
+
+	def load(self, filename='knregressor'):
+		for i, clf in enumerate(self.clfs):
+			self.clfs[i] = pickle.load(open("./models/"+filename+str(i), 'rb'))
 			
 	def print_bootstrap_scores(self):
 		with np.printoptions(precision=2):	

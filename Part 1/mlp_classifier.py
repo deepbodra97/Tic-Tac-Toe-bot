@@ -37,13 +37,15 @@ class MyMLPClassifier:
 		for train_index, test_index in kf.split(self.X):
 			self.clf.fit(self.X[train_index], self.y[train_index].ravel())	
 			self.scores.append(self.clf.score(self.X[test_index], self.y[test_index]))
-		self.print_bootstrap_scores()
+		self.print_cross_val_scores()
 		self.clf.fit(self.X, self.y.ravel())
 	
-	def print_bootstrap_scores(self):
-		print("Bootstrap accuracy: ", list(map(lambda x: round(100*x, 2), self.scores)))
-		print("Average Bootstrap accuracy: ", round(100*sum(self.scores)/len(self.scores), 2))
+	def print_cross_val_scores(self):
+		print("Cross Validation accuracy: ", list(map(lambda x: round(100*x, 2), self.scores)))
+		print("Average Cross validation accuracy: ", round(100*sum(self.scores)/len(self.scores), 2))
 
 	def print_evaluation(self):
 		y_pred = self.clf.predict(self.X)
-		evaluation.print_evaluation(self.y, y_pred)
+		evaluation.print_confusion_matrix(self.y, y_pred)
+		evaluation.print_precision_recall(self.y, y_pred)
+		print("Accuracy: ", evaluation.get_classifier_accuracy(self.y, y_pred)*100)

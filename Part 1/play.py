@@ -1,17 +1,25 @@
-from kneighbors_regressor import MyKNeighborsRegressor
+# from kneighbors_regressor import MyKNeighborsRegressor
 from linear_regressor import MyLinearRegressor
-from mlp_regressor import MyMLPRegressor
+# from mlp_regressor import MyMLPRegressor
+from knnr_test import MyKNeighborsRegressor
+from mlpr_test import MyMLPRegressor
 
 import numpy as np
 
 
 class TicTacToe:
 
-	def __init__(self):
-		# regressor = MyKNeighborsRegressor('tictac_multi.txt')
-		# regressor = MyLinearRegressor('tictac_multi.txt')
-		regressor = MyMLPRegressor('./data/tictac_multi.txt')
-		regressor.load()
+	def __init__(self, regressor_type=3):
+
+		if regressor_type == 3:
+			regressor = MyMLPRegressor('./data/tictac_multi.txt')
+			regressor.load()
+		elif regressor_type == 2:
+			regressor = MyKNeighborsRegressor('./data/tictac_multi.txt')
+			regressor.load()
+		elif regressor_type == 1:
+			regressor = MyLinearRegressor('./data/tictac_multi.txt')
+			regressor.fit()
 		self.regressor = regressor
 
 		self.board = np.array([0 for i in range(9)])
@@ -75,5 +83,6 @@ class TicTacToe:
 	        	if i!= 8: print('\n---------')
 	        	else: print('')
 
-
-tictactoe = TicTacToe()
+print('Choose difficulty level\n1. Easy (Linear Regressor)\n2. Medium (K-Neighbors Regressor)\n3. Hard (MLP Regressor)')
+regressor_type = int(input())
+tictactoe = TicTacToe(regressor_type)
