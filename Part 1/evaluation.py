@@ -13,7 +13,7 @@ def get_regressor_accuracy(y_pred, y_true):
 	for y_p, y_t in zip(y_pred, y_true):
 		for yp, yt in zip(y_p, y_t):
 			if yp==yt: n_correct += 1
-	return n_correct/(len(y_pred)*9)
+	return n_correct/(len(y_pred)*len(y_pred[0]))
 
 def print_confusion_matrix(y, y_pred):
 	with np.printoptions(precision=4, suppress=True):

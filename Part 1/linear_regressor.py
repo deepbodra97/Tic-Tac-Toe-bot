@@ -30,9 +30,11 @@ class MyLinearRegressor:
 		return predictions
 
 	def print_evaluation(self):
+		print("Accuracy: ")
 		for i, weight in enumerate(self.weights):	
 			y_pred = []
+			print("Model", i+1)
 			for x in self.X:
 				y_pred.append(np.matmul(weight.transpose(), x))
-			evaluation.print_evaluation(self.ys[:, i], np.around(y_pred))
-			print()
+			print(evaluation.get_regressor_accuracy([self.ys[:, i]], [np.around(y_pred)])*100)
+		print()

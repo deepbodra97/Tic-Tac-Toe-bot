@@ -1,11 +1,8 @@
-# from kneighbors_regressor import MyKNeighborsRegressor
+from kneighbors_regressor import MyKNeighborsRegressor
 from linear_regressor import MyLinearRegressor
-# from mlp_regressor import MyMLPRegressor
-from knnr_test import MyKNeighborsRegressor
-from mlpr_test import MyMLPRegressor
+from mlp_regressor import MyMLPRegressor
 
 import numpy as np
-
 
 class TicTacToe:
 
