@@ -10,9 +10,6 @@ activation_function = 'relu' # default = 'relu'
 optimizer = 'adam' # default = 'adam'
 learning_rate_init = 0.01 # default=0.001
 
-# TODO: architecture
-
-
 class MyMLPClassifier:
 
 	def __init__(self, file_path='./data/tictac_final.txt', hidden_layer_sizes=(9, )):
@@ -38,7 +35,6 @@ class MyMLPClassifier:
 			self.clf.fit(self.X[train_index], self.y[train_index].ravel())	
 			self.scores.append(self.clf.score(self.X[test_index], self.y[test_index]))
 		self.print_cross_val_scores()
-		self.clf.fit(self.X, self.y.ravel())
 	
 	def print_cross_val_scores(self):
 		print("Cross Validation accuracy: ", list(map(lambda x: round(100*x, 2), self.scores)))

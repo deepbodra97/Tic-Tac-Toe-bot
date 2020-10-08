@@ -7,7 +7,7 @@ from sklearn.model_selection import KFold
 import numpy as np
 
 # hyperparameters
-n_neighbors = 3
+n_neighbors = 1
 
 class MyKNeighborsClassifier:
 
@@ -19,8 +19,7 @@ class MyKNeighborsClassifier:
 		data = np.loadtxt(file_path)
 		self.X = data[:, :9]
 		self.y = data[:, 9:]
-		
-		
+
 	def fit(self):
 		kf = KFold(n_splits=10, random_state=1, shuffle=True)
 		for train_index, test_index in kf.split(self.X):

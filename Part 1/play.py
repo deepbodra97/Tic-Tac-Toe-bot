@@ -7,7 +7,6 @@ import numpy as np
 class TicTacToe:
 
 	def __init__(self, regressor_type=3):
-
 		if regressor_type == 3:
 			regressor = MyMLPRegressor('./data/tictac_multi.txt')
 			regressor.load()
@@ -54,7 +53,10 @@ class TicTacToe:
 		return max_idx+1
 
 	def loop(self):
-		self.print_board()
+		print("Board Convention")
+		self.print_board(True)
+		print()
+		self.print_board(False)
 		while len(self.moves) != 9:
 			if self.is_players_move:
 				move = int(input('Your turn: '))
@@ -62,18 +64,18 @@ class TicTacToe:
 			else:
 				move = self.get_computer_move()
 				self.place(move)
-			self.print_board()
+			self.print_board(False)
 			if self.check_winner(): break
 		if not self.winner: print("Draw! I am as smart as you")
 		elif self.winner == 'Player': print("You Win! Seems like you are smart")
 		elif self.winner == 'Computer': print("You Lost! Better Luck next time")
 
-	def print_board(self):
+	def print_board(self, is_rules):
 	    for i, c in enumerate(self.board):
 	        if c != 0:
-	        	print(self.chars[c], end='')
+	        	print(self.chars[c] if not is_rules else i+1, end='')
 	        else:
-	        	print(self.chars[c], end='')
+	        	print(self.chars[c] if not is_rules else i+1, end='')
 	        if (i+1)%3:
 	        	print(' | ', end='')
 	        else:
