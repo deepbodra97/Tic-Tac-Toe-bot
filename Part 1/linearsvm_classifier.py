@@ -27,6 +27,7 @@ class MyLinearSVMClassifier:
 		
 		
 	def fit(self):
+		# train using 10 fold cross validation
 		kf = KFold(n_splits=n_splits, random_state=random_state, shuffle=shuffle)
 		for train_index, test_index in kf.split(self.X):
 			self.clf.fit(self.X[train_index], self.y[train_index].ravel())	

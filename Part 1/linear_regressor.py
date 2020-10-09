@@ -5,7 +5,7 @@ import numpy as np
 class MyLinearRegressor:
 
 	def __init__(self, file_path='./data/tictac_multi.txt'):
-		self.weights = []
+		self.weights = [] # store weights for the 9 models
 		self.file_path = file_path
 
 		data = np.loadtxt(file_path)
@@ -16,6 +16,7 @@ class MyLinearRegressor:
 		
 	def fit(self):
 		print("Regression Coefficients")
+		# 9 models for each component of the output vector
 		for i in range(9):
 			print("Model ", i)
 			weight = np.matmul(np.linalg.inv(np.matmul(self.X.transpose(), self.X)), np.matmul(self.X.transpose(), self.ys[:, i]))
@@ -23,7 +24,7 @@ class MyLinearRegressor:
 			print(weight)
 	
 	def predict(self, x):
-		x = np.append(x, 1)
+		x = np.append(x, 1) # add additional variable with value of 1
 		predictions = [0]*9
 		for i, weight in enumerate(self.weights):
 			predictions[i] = np.matmul(weight.transpose(), x)

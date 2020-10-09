@@ -9,7 +9,7 @@ import pickle
 
 # hyperparameters
 hidden_layer_sizes = (27, 27, 27) # default = (100, )
-activation_function = 'logistic' # deault = 'relu'
+activation_function = 'logistic' # sigmoid activation function
 optimizer = 'adam' # default = 'adam'
 learning_rate_init = 0.01 # default=0.001
 random_state=1

@@ -19,7 +19,7 @@ shuffle = True
 class MyKNeighborsRegressor:
 
 	def __init__(self, file_path='./data/tictac_multi.txt'):
-		self.clf = KNeighborsRegressor(n_neighbors=n_neighbors, p=2)
+		self.clf = KNeighborsRegressor(n_neighbors=n_neighbors, p=2) # p=2 means that it will use Euclidean Distance instead of Minoswski distance
 		self.scores = []
 		self.file_path = file_path
 
@@ -40,10 +40,10 @@ class MyKNeighborsRegressor:
 	def predict(self, x):
 		return self.clf.predict(x)[0]
 
-	def save(self, filename='knregressor'):
+	def save(self, filename='knregressor'): # save the model
 		pickle.dump(self.clf, open("./models/"+filename, 'wb'))
 
-	def load(self, filename='knregressor'):
+	def load(self, filename='knregressor'): # load the model
 		self.clf = pickle.load(open("./models/"+filename, 'rb'))
 			
 	def print_cross_val_scores(self):
